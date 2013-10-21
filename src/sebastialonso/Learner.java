@@ -9,7 +9,7 @@ public class Learner {
     private int numberOfStates;
     private int numberOfObservations;
     private int numberOfSymbols;
-    private  double DELTA = 1e-13;
+    private  double DELTA = 1e-10;
 
 
     public Learner(Double[][] transition, Double[][] emission, Double[] initial, String[] observations){
@@ -19,6 +19,14 @@ public class Learner {
         this.observationsVector = observations;
         this.numberOfStates = transition.length;
         this.numberOfObservations = observations.length;
+        this.numberOfSymbols = emission[0].length;
+    }
+
+    public Learner(Double[][] transition, Double[][] emission, Double[] initial){
+        this.transitionMatrix = transition;
+        this.emissionMatrix = emission;
+        this.initialState = initial;
+        this.numberOfStates = transition.length;
         this.numberOfSymbols = emission[0].length;
     }
 
@@ -172,10 +180,10 @@ public class Learner {
         }
 
         String[] response = new String[2];
-        response[0] = HmmMethods.matrixToString(transition);
-        response[1] = HmmMethods.matrixToString(emission);
+        response[0] = Helpers.matrixToString(transition);
+        response[1] = Helpers.matrixToString(emission);
 
-        return HmmMethods.printMatrixes(response);
+        return Helpers.printMatrixes(response);
     }
 
 
@@ -211,8 +219,8 @@ public class Learner {
             System.out.println("newProb :" + newProb);
 
             if (Math.abs(currentProb - newProb) < DELTA){
-                answer[0] = HmmMethods.matrixToString(estimatedTransition);
-                answer[1] = HmmMethods.matrixToString(estimatedEmission);
+                answer[0] = Helpers.matrixToString(estimatedTransition);
+                answer[1] = Helpers.matrixToString(estimatedEmission);
                 break;
             }
             else {
@@ -229,7 +237,7 @@ public class Learner {
             }
         }
 
-        return HmmMethods.printMatrixes(answer);
+        return Helpers.printMatrixes(answer);
     }
 
     /**
@@ -304,5 +312,7 @@ public class Learner {
 
         return emission;
     }
+
+
 }
 

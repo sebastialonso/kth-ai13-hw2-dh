@@ -1,6 +1,6 @@
 package sebastialonso;
 
-public class HmmMethods {
+public class Helpers {
 
     /**
      * Builds a matrix out of a string with matrix information
@@ -65,6 +65,14 @@ public class HmmMethods {
         return st;
     }
 
+    public static String vectorToString(Double[] vector){
+        String st = "";
+        for (Double element : vector){
+            st += element + " ";
+        }
+        return st;
+    }
+
     public static String printMatrixes(String[] matrixes){
         String st = "";
         for (String mat : matrixes){
@@ -74,5 +82,12 @@ public class HmmMethods {
         return st;
     }
 
+    public static Double sumElements(Double[] row){
+        Double value = 0.0;
+        for (Double number : row){
+            value += number;
+        }
+        return value;
+    }
 
 }

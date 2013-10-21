@@ -1,6 +1,11 @@
 package sebastialonso;
+
+import java.util.Random;
+
 class Player {
-	// /constructor
+    private int numberOfIterations = 0;
+    private Learner[] shooter;
+    // /constructor
 
 	// /There is no data in the beginning, so not much should be done here.
 	public Player() {
@@ -22,6 +27,57 @@ class Player {
 	 * @return the prediction of a bird we want to shoot at, or cDontShoot to pass
 	 */
 	public Action shoot(GameState pState, Deadline pDue) {
+        //First round: create the learners and model
+
+        if (this.numberOfIterations == 1) {
+
+            shooter = new Learner[pState.getNumBirds()];
+            Double[][] transition = new Double[5][5];
+            Double[][] emission = new Double[5][8];
+            Double[] initial = new Double[5];
+            Random random = new Random();
+
+            //Initialize randomly
+            //Transition
+            for (int i = 0; i < 5; i++){
+                Double ranDelta = 1.0/ 5.0 - Math.abs(random.nextGaussian() * 0.0001);
+                for (int j = 0; j < 5; j++){
+                    transition[i][j] = ranDelta;
+                    ranDelta -= Math.abs(random.nextGaussian() * 0.0001);
+                }
+            }
+
+            //Emission
+            for (int i = 0; i < 5; i++){
+                Double ranDelta = 1.0/8.0;
+                for (int j = 0; j <  8; j++){
+                    emission[i][j] = ranDelta;
+                    ranDelta -= Math.abs(random.nextGaussian() * 0.0001);
+                }
+            }
+
+            //Initial
+            for (int i = 0; i < 5; i++){
+                Double ranDelta = 1.0/5.0;
+                initial[i] = ranDelta;
+                ranDelta -= Math.abs(random.nextGaussian() * 0.001);
+            }
+
+            //for (int i=0; i < shooter.length; i++){
+            //    shooter[i] = new Learner(transition, emission, initial);
+            //}
+        } else{
+
+            //We have enough observations to start the training
+            /*if (this.numberOfIterations == 50){
+
+                for (int i=0; i < pState.getNumBirds(); i++){
+
+                }
+
+            }*/
+        }
+        this.numberOfIterations++;
 		/*
 		 * Here you should write your clever algorithms to get the best action.
 		 * This skeleton never shoots.
