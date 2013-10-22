@@ -63,19 +63,21 @@ class Player {
                 ranDelta -= Math.abs(random.nextGaussian() * 0.001);
             }
 
-            //for (int i=0; i < shooter.length; i++){
-            //    shooter[i] = new Learner(transition, emission, initial);
-            //}
+            //Initialize the Leaners
+            for (int i=0; i < shooter.length; i++){
+                shooter[i] = new Learner(transition, emission, initial);
+            }
+
         } else{
 
             //We have enough observations to start the training
-            /*if (this.numberOfIterations == 50){
+            if (this.numberOfIterations == 50){
 
                 for (int i=0; i < pState.getNumBirds(); i++){
-
+                    shooter[i].setObservationVector(pState.getBird(i).);
                 }
 
-            }*/
+            }
         }
         this.numberOfIterations++;
 		/*

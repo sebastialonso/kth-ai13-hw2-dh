@@ -1,25 +1,32 @@
 package sebastialonso;
 
 
+import java.util.Vector;
+
 public class Learner {
     private Double[][] transitionMatrix;
     private Double[][] emissionMatrix;
     private Double[] initialState;
-    private String[] observationsVector;
+    private Vector<Integer> observationsVector;
     private int numberOfStates;
     private int numberOfObservations;
     private int numberOfSymbols;
     private  double DELTA = 1e-10;
 
 
-    public Learner(Double[][] transition, Double[][] emission, Double[] initial, String[] observations){
+    public Learner(Double[][] transition, Double[][] emission, Double[] initial, Vector<Integer> observations){
         this.transitionMatrix = transition;
         this.emissionMatrix = emission;
         this.initialState = initial;
         this.observationsVector = observations;
         this.numberOfStates = transition.length;
-        this.numberOfObservations = observations.length;
+        this.numberOfObservations = observations.size();
         this.numberOfSymbols = emission[0].length;
+    }
+
+    public void setObservationVector(Integer newObs){
+        this.observationsVector.add(newObs);
+        this.numberOfObservations = observationsVector.size();
     }
 
     public Learner(Double[][] transition, Double[][] emission, Double[] initial){
@@ -57,7 +64,7 @@ public class Learner {
             scalingFactor[0] = 0.0;
 
             for (int i=0; i < numberOfStates; i++){
-                alpha[0][i] = initial[i] * emission[i][Integer.parseInt(observationsVector[0])];
+                alpha[0][i] = initial[i] * emission[i][observationsVector.get(0)];
                 scalingFactor[0] += alpha[0][i];
             }
 
@@ -75,7 +82,7 @@ public class Learner {
                     for (int j=0; j < numberOfStates; j++){
                         alpha[t][i] += alpha[t-1][j] * transition[j][i];
                     }
-                    alpha[t][i] *= emission[i][Integer.parseInt(observationsVector[t])];
+                    alpha[t][i] *= emission[i][observationsVector.get(t)];
                     scalingFactor[t] += alpha[t][i];
                 }
                 //Scale a_t(i)
@@ -96,7 +103,7 @@ public class Learner {
                 for (int i=0; i < numberOfStates; i++){
                     beta[t][i] = 0.0;
                     for (int j=0; j < numberOfStates; j++){
-                        beta[t][i] = beta[t][i] + transition[i][j] * emission[j][Integer.parseInt(observationsVector[t+1])] * beta[t+1][j];
+                        beta[t][i] = beta[t][i] + transition[i][j] * emission[j][observationsVector.get(t+1)] * beta[t+1][j];
                     }
                     //scale beta_t
                     beta[t][i] *= scalingFactor[t];
@@ -108,13 +115,13 @@ public class Learner {
                 double denominator = 0.0;
                 for (int i=0; i < numberOfStates; i++){
                     for (int j=0; j< numberOfStates; j++){
-                        denominator += alpha[t][i] * transition[i][j] * emission[j][Integer.parseInt(observationsVector[t+1])] * beta[t+1][j];
+                        denominator += alpha[t][i] * transition[i][j] * emission[j][observationsVector.get(t+1)] * beta[t+1][j];
                     }
                 }
                 for (int i=0; i < numberOfStates; i++){
                     createGamma[t][i] = 0.0;
                     for (int j=0; j < numberOfStates; j++){
-                        diGamma[t][i][j] = (alpha[t][i] * transition[i][j] * emission[j][Integer.parseInt(observationsVector[t+1])] * beta[t+1][j])/ denominator;
+                        diGamma[t][i][j] = (alpha[t][i] * transition[i][j] * emission[j][observationsVector.get(t+1)] * beta[t+1][j])/ denominator;
                         createGamma[t][i] += diGamma[t][i][j];
                     }
                 }
@@ -146,7 +153,7 @@ public class Learner {
                     double numerator = 0.0;
                     double denominator = 0.0;
                     for (int t=0; t < numberOfObservations -1; t++){
-                        if (Integer.parseInt(observationsVector[t]) ==  j){
+                        if (observationsVector.get(t) ==  j){
                             numerator += createGamma[t][i];
                         }
                         denominator += createGamma[t][i];
@@ -301,7 +308,7 @@ public class Learner {
         for (int j = 0; j < numberOfStates; j++){
             for (int k = 0; k < numberOfSymbols; k++){
                 for (int t = 0; t < numberOfObservations; t++){
-                    if (Integer.parseInt(observationsVector[t]) == k){
+                    if (observationsVector.get(t) == k){
                         numerator = Extended.esum(numerator, gamma[t][j]);
                     }
                     denominator = Extended.esum(denominator, gamma[t][j]);
