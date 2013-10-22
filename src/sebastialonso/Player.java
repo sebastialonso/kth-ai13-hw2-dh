@@ -1,9 +1,11 @@
 package sebastialonso;
 
 import java.util.Random;
+import java.util.Vector;
 
 class Player {
     private int numberOfIterations = 0;
+    private Vector<Vector<Integer>> observations;
     private Learner[] shooter;
     // /constructor
 
@@ -27,11 +29,17 @@ class Player {
 	 * @return the prediction of a bird we want to shoot at, or cDontShoot to pass
 	 */
 	public Action shoot(GameState pState, Deadline pDue) {
-        //First round: create the learners and model
+        System.err.println("Iteration: " + this.numberOfIterations);
+        //Reset iterations count if a new season starts
+        if (this.numberOfIterations == 99) {
+            this.numberOfIterations = 0;
+        }
 
-        if (this.numberOfIterations == 1) {
+        //First round: create the learner for each bird, and populate it with the model. Also start gathering observations
+        if (this.numberOfIterations == 0) {
 
             shooter = new Learner[pState.getNumBirds()];
+            observations = new Vector<Vector<Integer>>(pState.getNumBirds());
             Double[][] transition = new Double[5][5];
             Double[][] emission = new Double[5][8];
             Double[] initial = new Double[5];
@@ -63,19 +71,46 @@ class Player {
                 ranDelta -= Math.abs(random.nextGaussian() * 0.001);
             }
 
-            //Initialize the Leaners
-            for (int i=0; i < shooter.length; i++){
+            //Initialize the Learners
+            for (int i = 0; i < shooter.length; i++){
                 shooter[i] = new Learner(transition, emission, initial);
             }
 
+            //Start recording observations for each bird
+            for (int bird = 0; bird < pState.getNumBirds(); bird++){
+
+                Vector<Integer> obsForBird = new Vector<Integer>();
+                obsForBird.add(pState.getBird(bird).getLastObservation());
+                observations.add(obsForBird);
+            }
+
+
         } else{
 
-            //We have enough observations to start the training
-            if (this.numberOfIterations == 50){
-
-                for (int i=0; i < pState.getNumBirds(); i++){
-                    shooter[i].setObservationVector(pState.getBird(i).);
+            //If not ready to train yet, collect observations from each bird
+            for (int bird = 0; bird < pState.getNumBirds(); bird++){
+                //The bird needs to be alive to record observation
+                if ( pState.getBird(bird).isAlive()){
+                    observations.get(bird).add( pState.getBird(bird).getLastObservation());
                 }
+            }
+            //We have enough observations to start the training
+            if (this.numberOfIterations == 75){
+
+                //Add the observations to the Learners
+                for (int i = 0; i < shooter.length; i++){
+                    shooter[i].setObservationVector(observations.get(i));
+                }
+                //Train each learner with 30 iterations
+                for (int i = 0; i < shooter.length; i++){
+                    shooter[i].learnReload(30);
+                }
+
+                //Then each learner must find out how much probable is to get the sequence of observation seen. (Problem 1: Evaluation)
+                //If is a good probablity, then the model is possibly right
+                //Predict the most likely next observation, and shoot (Problem 0: Most likely next observation)
+                //Else, don't do anything, go next
+
 
             }
         }
@@ -83,9 +118,7 @@ class Player {
 		/*
 		 * Here you should write your clever algorithms to get the best action.
 		 * This skeleton never shoots.
-		 */
-        System.err.println(pState.getNumBirds());
-
+         */
 		// This line choose not to shoot
 		//return cDontShoot;
 

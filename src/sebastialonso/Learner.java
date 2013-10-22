@@ -24,8 +24,8 @@ public class Learner {
         this.numberOfSymbols = emission[0].length;
     }
 
-    public void setObservationVector(Integer newObs){
-        this.observationsVector.add(newObs);
+    public void setObservationVector(Vector<Integer> observations){
+        this.observationsVector = observations;
         this.numberOfObservations = observationsVector.size();
     }
 
@@ -37,7 +37,7 @@ public class Learner {
         this.numberOfSymbols = emission[0].length;
     }
 
-    public String learnReload(int iterations){
+    public void learnReload(int iterations){
         Double oldLogProb = Double.NEGATIVE_INFINITY;
 
         Double[] initial = initialState;
@@ -186,11 +186,14 @@ public class Learner {
 
         }
 
-        String[] response = new String[2];
-        response[0] = Helpers.matrixToString(transition);
-        response[1] = Helpers.matrixToString(emission);
+        this.transitionMatrix = transition;
+        this.emissionMatrix = emission;
 
-        return Helpers.printMatrixes(response);
+        //String[] response = new String[2];
+        //response[0] = Helpers.matrixToString(transition);
+        //response[1] = Helpers.matrixToString(emission);
+
+        //return Helpers.printMatrixes(response);
     }
 
 
