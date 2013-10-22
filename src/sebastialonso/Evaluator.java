@@ -1,22 +1,24 @@
 package sebastialonso;
 
+import java.util.Vector;
+
 public class Evaluator {
 
     private Double[][] transitionMatrix;
     private Double[][] emissionMatrix;
     private Double[] initialVector;
-    private String[]  observationsVector;
+    private Vector<Integer> observationsVector;
     private int numberOfStates;
     private int numberOfObservations;
 
 
-    public Evaluator(Double[][] transition, Double[][] emission, Double[] initial, String[] observations){
+    public Evaluator(Double[][] transition, Double[][] emission, Double[] initial, Vector<Integer> observations){
         this.transitionMatrix = transition;
         this.emissionMatrix = emission;
         this.initialVector = initial;
         this.observationsVector = observations;
         this.numberOfStates = transitionMatrix.length;
-        this.numberOfObservations = observationsVector.length;
+        this.numberOfObservations = observationsVector.size();
     }
 
     /**
@@ -37,7 +39,7 @@ public class Evaluator {
         for (int i=0; i < numberOfStates; i++){
             alpha[0][i] = Extended.eproduct(
                     Extended.eln(initialVector[i]),
-                    Extended.eln(emissionMatrix[i][Integer.parseInt(observationsVector[0])]));
+                    Extended.eln(emissionMatrix[i][observationsVector.get(0)]));
 
         }
 
@@ -48,7 +50,7 @@ public class Evaluator {
                 for (int j=0; j < numberOfStates; j++){
                     val = Extended.esum(val, Extended.eproduct(alpha[t - 1][j], Extended.eln(transitionMatrix[j][i])));
                 }
-                alpha[t][i] = Extended.eproduct(val, Extended.eln(emissionMatrix[i][Integer.parseInt(observationsVector[t])]));
+                alpha[t][i] = Extended.eproduct(val, Extended.eln(emissionMatrix[i][observationsVector.get(t)]));
 
             }
         }
@@ -74,7 +76,7 @@ public class Evaluator {
                     value += Extended.esum( value,Extended.eproduct(
                                     Extended.eln(transitionMatrix[i][j]),
                                                  Extended.eproduct(
-                                                    emissionMatrix[j][Integer.parseInt(observationsVector[t+1])],
+                                                    emissionMatrix[j][observationsVector.get(t+1)],
                                                     Extended.eln(betaMatrix[t+1][j]))));
                 }
                 betaMatrix[t][i] = value;
@@ -102,7 +104,7 @@ public class Evaluator {
                             Extended.eproduct(
                                     Extended.eln(transitionMatrix[i][j]),
                                     Extended.eproduct(
-                                            Extended.eln(emissionMatrix[j][Integer.parseInt(observationsVector[t+1])]),
+                                            Extended.eln(emissionMatrix[j][observationsVector.get(t+1)]),
                                             beta[t+1][j]
                                     )
                             )
