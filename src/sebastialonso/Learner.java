@@ -11,7 +11,9 @@ public class Learner {
     private int numberOfStates;
     private int numberOfObservations;
     private int numberOfSymbols;
-    private  double DELTA = 1e-7;
+    private  double DELTA = 1e-5;
+    private Double evaluationLogProb = Double.NEGATIVE_INFINITY;
+    private Double[] gammaTMinusTwo;
 
 
     public Learner(Double[][] transition, Double[][] emission, Double[] initial, Vector<Integer> observations){
@@ -42,26 +44,22 @@ public class Learner {
      * @param iterations
      */
     public void learnReload(int iterations){
-        Double oldLogProb = Double.NEGATIVE_INFINITY;
 
         Double[] initial = initialState;
-        Double[][] transition = transitionMatrix;
-        Double[][] emission =  emissionMatrix;
+        Double[][] transition = getTransitionMatrix();
+        Double[][] emission = getEmissionMatrix();
 
-        System.err.println("Iteraciones en learnReload");
-        System.err.println("numberOfObservations: "+ numberOfObservations);
-        System.err.println("numberOfSymbols: "+ numberOfSymbols);
-        for (int iteration=0; iteration < iterations; iteration++){
-            System.err.println("iter: " + iteration);
+        //System.err.println("Training");
+        for (int iteration = 0; iteration < iterations; iteration++){
+            //System.err.println("iter: " + iteration);
             Double[] estimatedInitial = new Double[numberOfStates];
             Double[][] estimatedTransition = new Double[numberOfStates][numberOfStates];
             Double[][] estimatedEmission = new Double[numberOfStates][numberOfSymbols];
 
-            ///The alpha pass
             double[] scalingFactor = new double[numberOfObservations];
             double[][] alpha = new double[numberOfObservations][numberOfStates];
             double[][] beta = new double[numberOfObservations][numberOfStates];
-            double[][] createGamma = new double[numberOfObservations][numberOfStates];
+            Double[][] createGamma= new Double[numberOfObservations][numberOfStates];
             double[][][] diGamma = new double[numberOfObservations][numberOfStates][numberOfStates];
 
 
@@ -69,23 +67,23 @@ public class Learner {
 
             scalingFactor[0] = 0.0;
 
-            for (int i=0; i < numberOfStates; i++){
+            for (int i = 0; i < numberOfStates; i++){
                 alpha[0][i] = initial[i] * emission[i][observationsVector.get(0)];
                 scalingFactor[0] += alpha[0][i];
             }
 
             //Scale alpha[0]
             scalingFactor[0] = 1/scalingFactor[0];
-            for (int i=0; i < numberOfStates; i++){
+            for (int i = 0; i < numberOfStates; i++){
                 alpha[0][i] *= scalingFactor[0];
             }
 
             //compute a_t(i)
             for (int t = 1; t< numberOfObservations; t++){
                 scalingFactor[t] = 0.0;
-                for (int i=0; i < numberOfStates; i++){
+                for (int i = 0; i < numberOfStates; i++){
                     alpha[t][i] = 0.0;
-                    for (int j=0; j < numberOfStates; j++){
+                    for (int j = 0; j < numberOfStates; j++){
                         alpha[t][i] += alpha[t-1][j] * transition[j][i];
                     }
                     alpha[t][i] *= emission[i][observationsVector.get(t)];
@@ -93,22 +91,22 @@ public class Learner {
                 }
                 //Scale a_t(i)
                 scalingFactor[t] = 1/scalingFactor[t];
-                for (int i=0; i < numberOfStates; i++){
+                for (int i = 0; i < numberOfStates; i++){
                     alpha[t][i] *= scalingFactor[t];
                 }
             }
 
             ///The beta pass
             //Scale beta
-            for (int i=0; i < numberOfStates; i++){
+            for (int i = 0; i < numberOfStates; i++){
                 beta[numberOfObservations - 1][i] = scalingFactor[numberOfObservations-1];
             }
 
             //beta pass
-            for (int t= numberOfObservations - 2; t >= 0; t--){
-                for (int i=0; i < numberOfStates; i++){
+            for (int t = numberOfObservations - 2; t >= 0; t--){
+                for (int i = 0; i < numberOfStates; i++){
                     beta[t][i] = 0.0;
-                    for (int j=0; j < numberOfStates; j++){
+                    for (int j = 0; j < numberOfStates; j++){
                         beta[t][i] = beta[t][i] + transition[i][j] * emission[j][observationsVector.get(t+1)] * beta[t+1][j];
                     }
                     //scale beta_t
@@ -117,35 +115,39 @@ public class Learner {
             }
 
             ///compute createGamma och diggama
-            for (int t=0; t < numberOfObservations - 1; t++){
+            for (int t = 0; t < numberOfObservations - 1; t++){
                 double denominator = 0.0;
-                for (int i=0; i < numberOfStates; i++){
-                    for (int j=0; j< numberOfStates; j++){
+                for (int i = 0; i < numberOfStates; i++){
+                    for (int j = 0; j< numberOfStates; j++){
                         denominator += alpha[t][i] * transition[i][j] * emission[j][observationsVector.get(t+1)] * beta[t+1][j];
                     }
                 }
-                for (int i=0; i < numberOfStates; i++){
+                for (int i = 0; i < numberOfStates; i++){
                     createGamma[t][i] = 0.0;
-                    for (int j=0; j < numberOfStates; j++){
+                    for (int j = 0; j < numberOfStates; j++){
                         diGamma[t][i][j] = (alpha[t][i] * transition[i][j] * emission[j][observationsVector.get(t+1)] * beta[t+1][j])/ denominator;
                         createGamma[t][i] += diGamma[t][i][j];
                     }
                 }
             }
 
+            //Set gamma for posterior use
+            this.gammaTMinusTwo = createGamma[numberOfObservations -2];
+
+
             ///Re-estimate model
             //Re.estimate pi
-            for (int i=0; i < numberOfStates; i++){
+            for (int i = 0; i < numberOfStates; i++){
                 estimatedInitial[i] = createGamma[0][i];
             }
 
             //Re-estimate A
-            for (int i=0; i < numberOfStates; i++){
-                for (int j=0; j < numberOfStates; j++){
+            for (int i = 0; i < numberOfStates; i++){
+                for (int j = 0; j < numberOfStates; j++){
                     double numerator = 0.0;
                     double denominator = 0.0;
 
-                    for (int t=0; t < numberOfObservations-1; t++){
+                    for (int t = 0; t < numberOfObservations-1; t++){
                         numerator += diGamma[t][i][j];
                         denominator += createGamma[t][i];
                     }
@@ -154,11 +156,11 @@ public class Learner {
             }
 
             //Re-estimate B
-            for (int i=0; i < numberOfStates; i++){
-                for (int j=0; j < numberOfSymbols; j++){
+            for (int i = 0; i < numberOfStates; i++){
+                for (int j = 0; j < numberOfSymbols; j++){
                     double numerator = 0.0;
                     double denominator = 0.0;
-                    for (int t=0; t < numberOfObservations -1; t++){
+                    for (int t = 0; t < numberOfObservations -1; t++){
                         if (observationsVector.get(t) ==  j){
                             numerator += createGamma[t][i];
                         }
@@ -169,37 +171,32 @@ public class Learner {
             }
 
             ///Compute log[P(O|lambda)]
-            double logProb =0;
-            for (int t=0; t < numberOfObservations; t++){
+            double logProb = 0.0;
+            for (int t = 0; t < numberOfObservations; t++){
                 logProb += Math.log(scalingFactor[t]);
             }
-            logProb = -1 * logProb;
+            logProb = -logProb;
 
             //Move the values
             transition = estimatedTransition;
             emission = estimatedEmission;
             initial = estimatedInitial;
 
-            if (iteration == iterations - 1 || logProb <= oldLogProb){
+            if (Math.abs(logProb - evaluationLogProb) < DELTA ){
+                System.err.println("Convergence achieved");
                 break;
 
             }
             else {
-                System.err.println("oldProb: " + oldLogProb);
-                System.err.println("logProb: " + logProb);
-                oldLogProb = logProb;
+                //System.err.println("oldProb: " + evaluationLogProb);
+                //System.err.println("logProb: " + logProb);
+                this.evaluationLogProb = logProb;
             }
 
         }
 
         this.transitionMatrix = transition;
         this.emissionMatrix = emission;
-
-        //String[] response = new String[2];
-        //response[0] = Helpers.matrixToString(transition);
-        //response[1] = Helpers.matrixToString(emission);
-
-        //return Helpers.printMatrixes(response);
     }
 
     /* Cancer code down here
@@ -332,10 +329,20 @@ public class Learner {
     }
 
     public Double evaluation(){
-        Evaluator eval = new Evaluator(this.transitionMatrix, this.emissionMatrix, this.initialState, this.observationsVector);
-        return eval.evaluate();
+        return this.evaluationLogProb;
     }
 
 
+    public Double[] getGammaTMinusTwo() {
+        return gammaTMinusTwo;
+    }
+
+    public Double[][] getTransitionMatrix() {
+        return transitionMatrix;
+    }
+
+    public Double[][] getEmissionMatrix() {
+        return emissionMatrix;
+    }
 }
 

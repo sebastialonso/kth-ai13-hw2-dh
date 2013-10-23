@@ -5,13 +5,14 @@
     <ignored path="duckhunt.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/Main.java" changelist="d526d32d-bd91-4e5d-8ba2-02aab97dd967" time="1382382188010" ignored="false" />
-    <file path="/Player.java" changelist="d526d32d-bd91-4e5d-8ba2-02aab97dd967" time="1382486128886" ignored="false" />
+    <file path="/Player.java" changelist="d526d32d-bd91-4e5d-8ba2-02aab97dd967" time="1382565079915" ignored="false" />
     <file path="/a.dummy" changelist="d526d32d-bd91-4e5d-8ba2-02aab97dd967" time="1382380452074" ignored="false" />
-    <file path="/Learner.java" changelist="d526d32d-bd91-4e5d-8ba2-02aab97dd967" time="1382486414217" ignored="false" />
+    <file path="/Learner.java" changelist="d526d32d-bd91-4e5d-8ba2-02aab97dd967" time="1382556373048" ignored="false" />
     <file path="/HmmMethods.java" changelist="d526d32d-bd91-4e5d-8ba2-02aab97dd967" time="1382388923923" ignored="false" />
     <file path="/Evaluator.java" changelist="d526d32d-bd91-4e5d-8ba2-02aab97dd967" time="1382468755662" ignored="false" />
-    <file path="$PROJECT_DIR$/playerOutput" changelist="d526d32d-bd91-4e5d-8ba2-02aab97dd967" time="1382486436300" ignored="false" />
+    <file path="$PROJECT_DIR$/playerOutput" changelist="d526d32d-bd91-4e5d-8ba2-02aab97dd967" time="1382565075755" ignored="false" />
     <file path="/fragment.java" changelist="d526d32d-bd91-4e5d-8ba2-02aab97dd967" time="1382482633300" ignored="false" />
+    <file path="/Helpers.java" changelist="d526d32d-bd91-4e5d-8ba2-02aab97dd967" time="1382564863135" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +73,7 @@
     <favorites_list name="duckhunt" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5">
+    <splitter split-orientation="horizontal" split-proportion="0.477306">
       <split-first>
         <leaf>
           <file leaf-file-name="Main.java" pinned="false" current="false" current-in-tab="false">
@@ -102,15 +103,6 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="Player.java" pinned="false" current="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/sebastialonso/Player.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="108" column="48" selection-start="4284" selection-end="4284" vertical-scroll-proportion="0.35852373">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
           <file leaf-file-name="Extended.java" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/sebastialonso/Extended.java">
               <provider selected="true" editor-type-id="text-editor">
@@ -123,7 +115,7 @@
           <file leaf-file-name="Learner.java" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/sebastialonso/Learner.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="152" column="17" selection-start="6243" selection-end="6243" vertical-scroll-proportion="0.0">
+                <state line="154" column="17" selection-start="6266" selection-end="6266" vertical-scroll-proportion="0.0">
                   <folding />
                 </state>
               </provider>
@@ -138,19 +130,19 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="Constants.java" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/sebastialonso/Constants.java">
+          <file leaf-file-name="Helpers.java" pinned="false" current="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/sebastialonso/Helpers.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="27" column="47" selection-start="1115" selection-end="1116" vertical-scroll-proportion="0.0">
+                <state line="44" column="10" selection-start="1678" selection-end="1678" vertical-scroll-proportion="0.02108963">
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="Helpers.java" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/sebastialonso/Helpers.java">
+          <file leaf-file-name="Constants.java" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/sebastialonso/Constants.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="72" column="5" selection-start="2648" selection-end="2648" vertical-scroll-proportion="0.0">
+                <state line="21" column="70" selection-start="841" selection-end="841" vertical-scroll-proportion="0.0">
                   <folding />
                 </state>
               </provider>
@@ -160,10 +152,10 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="Learner.java" pinned="false" current="true" current-in-tab="true">
+          <file leaf-file-name="Learner.java" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/sebastialonso/Learner.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="139" column="30" selection-start="5722" selection-end="5722" vertical-scroll-proportion="-0.28474575">
+                <state line="348" column="0" selection-start="12659" selection-end="12659" vertical-scroll-proportion="0.0">
                   <folding />
                 </state>
               </provider>
@@ -173,6 +165,15 @@
             <entry file="file://$PROJECT_DIR$/src/sebastialonso/Evaluator.java">
               <provider selected="true" editor-type-id="text-editor">
                 <state line="156" column="21" selection-start="5489" selection-end="5489" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Player.java" pinned="false" current="true" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/sebastialonso/Player.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="32" column="18" selection-start="1078" selection-end="1078" vertical-scroll-proportion="0.16271186">
                   <folding />
                 </state>
               </provider>
@@ -199,9 +200,9 @@
         <option value="$PROJECT_DIR$/src/sebastialonso/Extended.java" />
         <option value="$PROJECT_DIR$/src/sebastialonso/Main.java" />
         <option value="$PROJECT_DIR$/src/sebastialonso/HmmMethods.java" />
-        <option value="$PROJECT_DIR$/src/sebastialonso/Helpers.java" />
         <option value="$PROJECT_DIR$/src/sebastialonso/Evaluator.java" />
         <option value="$PROJECT_DIR$/src/sebastialonso/Learner.java" />
+        <option value="$PROJECT_DIR$/src/sebastialonso/Helpers.java" />
         <option value="$PROJECT_DIR$/src/sebastialonso/Player.java" />
       </list>
     </option>
@@ -241,13 +242,13 @@
   <component name="PropertiesComponent">
     <property name="GoToFile.includeJavaFiles" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
-    <property name="recentsLimit" value="5" />
     <property name="MemberChooser.sorted" value="false" />
+    <property name="recentsLimit" value="5" />
     <property name="restartRequiresConfirmation" value="true" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="dynamic.classpath" value="false" />
+    <property name="MemberChooser.copyJavadoc" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -450,6 +451,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/sebastialonso/Action.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="51" column="27" selection-start="1122" selection-end="1122" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sebastialonso/Evaluator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="156" column="21" selection-start="5489" selection-end="5489" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sebastialonso/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="17" selection-start="60" selection-end="60" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/sebastialonso/Extended.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="8" selection-start="8" selection-end="8" vertical-scroll-proportion="0.0">
@@ -464,51 +486,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sebastialonso/Action.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="27" selection-start="1122" selection-end="1122" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sebastialonso/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="17" selection-start="60" selection-end="60" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/sebastialonso/Constants.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="47" selection-start="1115" selection-end="1116" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sebastialonso/Helpers.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="72" column="5" selection-start="2648" selection-end="2648" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sebastialonso/Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="108" column="48" selection-start="4284" selection-end="4284" vertical-scroll-proportion="0.35852373">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sebastialonso/Evaluator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="156" column="21" selection-start="5489" selection-end="5489" vertical-scroll-proportion="0.0">
+        <state line="21" column="70" selection-start="841" selection-end="841" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sebastialonso/Learner.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="139" column="30" selection-start="5722" selection-end="5722" vertical-scroll-proportion="-0.28474575">
+        <state line="348" column="0" selection-start="12659" selection-end="12659" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sebastialonso/Helpers.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="44" column="10" selection-start="1678" selection-end="1678" vertical-scroll-proportion="0.02108963">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sebastialonso/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="18" selection-start="1078" selection-end="1078" vertical-scroll-proportion="0.16271186">
           <folding />
         </state>
       </provider>

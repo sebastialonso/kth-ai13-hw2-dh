@@ -89,5 +89,49 @@ public class Helpers {
         }
         return value;
     }
+    public static Double[] vectorTimesMatrix(Double[] vector, Double[][] matrix) throws Exception {
+        //System.err.println(vector.length + " == " + matrix.length);
+        if (vector.length == matrix.length){
+            Double[] result = new Double[matrix[0].length];
+            for (int colIndex = 0; colIndex < vector.length; colIndex++){
+                Double auxValue = 0.0;
+                for (int rowIndex = 0; rowIndex < vector.length; rowIndex++){
+                    auxValue += vector[rowIndex] * matrix[rowIndex][colIndex];
+                }
+                result[colIndex] = auxValue;
+            }
+            return result;
+        }
+        else {
+            throw new Exception("Not correct size of parameters");
+        }
+    }
+
+    public static Integer whereToShoot(Double[] gammaTMinusTwo, Double[][] transition, Double[][] emission) throws Exception {
+        Double[] gammaTMinusOne = vectorTimesMatrix(gammaTMinusTwo, transition);
+        gammaTMinusOne = vectorTimesMatrix(gammaTMinusOne, transition);
+
+        Double[] mostLikely = new Double[emission[0].length];
+        //System.err.println(mostLikely.length);
+        for (int colIndex=0; colIndex < mostLikely.length; colIndex++){
+            Double auxValue = 0.0;
+            for (int rowIndex = 0; rowIndex < emission.length; rowIndex++){
+                auxValue += gammaTMinusOne[rowIndex] * emission[rowIndex][colIndex];
+            }
+            mostLikely[colIndex] = auxValue;
+        }
+
+        Double maxValue = 0.0;
+        Integer arg = -1;
+
+        for (int i = 0; i < mostLikely.length; i++){
+            System.err.println(i);
+            if (mostLikely[i] > maxValue){
+                maxValue = mostLikely[i];
+                arg = i;
+            }
+        }
+        return arg;
+    }
 
 }

@@ -28,8 +28,13 @@ class Player {
 	 * @param pDue time before which we must have returned
 	 * @return the prediction of a bird we want to shoot at, or cDontShoot to pass
 	 */
-	public Action shoot(GameState pState, Deadline pDue) {
-        System.err.println("Iteration in shoot: " + this.numberOfIterations);
+	public Action shoot(GameState pState, Deadline pDue) throws Exception {
+        //System.err.println("Iteration in shoot: " + this.numberOfIterations);
+        System.err.println("asdad");
+
+        Integer victim = -1;
+        Integer shootTo = -1;
+
         //Reset iterations count if a new season starts
         if (this.numberOfIterations == 99) {
             this.numberOfIterations = 0;
@@ -95,7 +100,7 @@ class Player {
                 }
             }
             //We have enough observations to start the training
-            if (this.numberOfIterations == 74){
+            if (this.numberOfIterations == 89){
 
                 //Add the observations to the Learners
                 for (int i = 0; i < shooter.length; i++){
@@ -103,22 +108,32 @@ class Player {
                         shooter[i].setObservationVector(observations.get(i));
                     //System.err.println("Size observation[" + i + "]: " + observations.get(i).size());
                 }
-                //Train each learner with 30 iterations
+                //Train each learner with 50 iterations
                 for (int i = 0; i < shooter.length; i++){
                     if (pState.getBird(i).isAlive()){
-                        shooter[i].learnReload(50);
-                        System.err.println("Shooter[" + i + "] trained!");
+                        shooter[i].learnReload(70);
+                        //System.err.println("Shooter[" + i + "] trained!");
+                        //System.err.println("Evaluation for shooter[" + i +"]: " + shooter[i].evaluation());
                     }
                 }
 
                 System.err.println("Evaluation for each shooter");
                 //Then each learner must find out how much probable is to get the sequence of observation seen. (Problem 1: Evaluation)
+
+                //Take the most probable bird over all bird models
+                Double logProb = Double.NEGATIVE_INFINITY;
                 for (int i = 0; i < shooter.length; i++){
                     if (pState.getBird(i).isAlive()){
-                        System.err.println(shooter[i].evaluation());
+
+                        //System.err.println(shooter[i].evaluation());
+                        if (logProb < shooter[i].evaluation()){
+                            logProb = shooter[i].evaluation();
+                            victim = i;
+                        }
                     }
                 }
-                //If is a good probablity, then the model is possibly right
+                shootTo = Helpers.whereToShoot(shooter[victim].getGammaTMinusTwo(), shooter[victim].getTransitionMatrix(), shooter[victim].getEmissionMatrix());
+
                 //Predict the most likely next observation, and shoot (Problem 0: Most likely next observation)
                 //Else, don't do anything, go next
 
@@ -134,7 +149,7 @@ class Player {
 		//return cDontShoot;
 
 		// This line would predict that bird 0 will move right and shoot at it
-		return new Action(0, Constants.MOVE_RIGHT);
+		return new Action(victim, shootTo);
 	}
 
 	/**
@@ -183,6 +198,9 @@ class Player {
 	 */
 	public void reveal(GameState pState, int[] pSpecies, Deadline pDue) {
 	}
+
+
+
 
 	public static final Action cDontShoot = new Action(-1, -1);
 }
