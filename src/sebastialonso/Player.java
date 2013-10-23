@@ -29,7 +29,7 @@ class Player {
 	 * @return the prediction of a bird we want to shoot at, or cDontShoot to pass
 	 */
 	public Action shoot(GameState pState, Deadline pDue) {
-        System.err.println("Iteration: " + this.numberOfIterations);
+        System.err.println("Iteration in shoot: " + this.numberOfIterations);
         //Reset iterations count if a new season starts
         if (this.numberOfIterations == 99) {
             this.numberOfIterations = 0;
@@ -37,11 +37,11 @@ class Player {
 
         //First round: create the learner for each bird, and populate it with the model. Also start gathering observations
         if (this.numberOfIterations == 0) {
-
+            System.err.println(pState.getNumBirds());
             shooter = new Learner[pState.getNumBirds()];
             observations = new Vector<Vector<Integer>>(pState.getNumBirds());
             Double[][] transition = new Double[5][5];
-            Double[][] emission = new Double[5][8];
+            Double[][] emission = new Double[5][9];
             Double[] initial = new Double[5];
             Random random = new Random();
 
@@ -57,8 +57,8 @@ class Player {
 
             //Emission
             for (int i = 0; i < 5; i++){
-                Double ranDelta = 1.0/8.0;
-                for (int j = 0; j <  8; j++){
+                Double ranDelta = 1.0/9.0;
+                for (int j = 0; j <  9; j++){
                     emission[i][j] = ranDelta;
                     ranDelta -= Math.abs(random.nextGaussian() * 0.0001);
                 }
@@ -95,18 +95,29 @@ class Player {
                 }
             }
             //We have enough observations to start the training
-            if (this.numberOfIterations == 75){
+            if (this.numberOfIterations == 74){
 
                 //Add the observations to the Learners
                 for (int i = 0; i < shooter.length; i++){
-                    shooter[i].setObservationVector(observations.get(i));
+                    if (pState.getBird(i).isAlive())
+                        shooter[i].setObservationVector(observations.get(i));
+                    //System.err.println("Size observation[" + i + "]: " + observations.get(i).size());
                 }
                 //Train each learner with 30 iterations
                 for (int i = 0; i < shooter.length; i++){
-                    shooter[i].learnReload(30);
+                    if (pState.getBird(i).isAlive()){
+                        shooter[i].learnReload(50);
+                        System.err.println("Shooter[" + i + "] trained!");
+                    }
                 }
 
+                System.err.println("Evaluation for each shooter");
                 //Then each learner must find out how much probable is to get the sequence of observation seen. (Problem 1: Evaluation)
+                for (int i = 0; i < shooter.length; i++){
+                    if (pState.getBird(i).isAlive()){
+                        System.err.println(shooter[i].evaluation());
+                    }
+                }
                 //If is a good probablity, then the model is possibly right
                 //Predict the most likely next observation, and shoot (Problem 0: Most likely next observation)
                 //Else, don't do anything, go next

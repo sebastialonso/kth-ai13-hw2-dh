@@ -11,7 +11,7 @@ public class Learner {
     private int numberOfStates;
     private int numberOfObservations;
     private int numberOfSymbols;
-    private  double DELTA = 1e-10;
+    private  double DELTA = 1e-7;
 
 
     public Learner(Double[][] transition, Double[][] emission, Double[] initial, Vector<Integer> observations){
@@ -37,6 +37,10 @@ public class Learner {
         this.numberOfSymbols = emission[0].length;
     }
 
+    /**
+     * Trains the model for a certain number of iterations, and then sets the instance's matrices has the estimated ones
+     * @param iterations
+     */
     public void learnReload(int iterations){
         Double oldLogProb = Double.NEGATIVE_INFINITY;
 
@@ -44,9 +48,11 @@ public class Learner {
         Double[][] transition = transitionMatrix;
         Double[][] emission =  emissionMatrix;
 
-
+        System.err.println("Iteraciones en learnReload");
+        System.err.println("numberOfObservations: "+ numberOfObservations);
+        System.err.println("numberOfSymbols: "+ numberOfSymbols);
         for (int iteration=0; iteration < iterations; iteration++){
-
+            System.err.println("iter: " + iteration);
             Double[] estimatedInitial = new Double[numberOfStates];
             Double[][] estimatedTransition = new Double[numberOfStates][numberOfStates];
             Double[][] estimatedEmission = new Double[numberOfStates][numberOfSymbols];
@@ -174,15 +180,15 @@ public class Learner {
             emission = estimatedEmission;
             initial = estimatedInitial;
 
-            if (iteration < iterations && Math.abs(logProb - oldLogProb) < DELTA){
+            if (iteration == iterations - 1 || logProb <= oldLogProb){
                 break;
 
             }
             else {
+                System.err.println("oldProb: " + oldLogProb);
+                System.err.println("logProb: " + logProb);
                 oldLogProb = logProb;
             }
-
-
 
         }
 
@@ -196,8 +202,8 @@ public class Learner {
         //return Helpers.printMatrixes(response);
     }
 
-
-    public String learn(int iterations){
+    /* Cancer code down here
+    public void learn(int iterations){
 
         Double currentProb = Double.NEGATIVE_INFINITY;
 
@@ -207,9 +213,12 @@ public class Learner {
         Double[][] beta = currentModel.betaPass();
 
         //Store here the final matrices
-        String[] answer = new String[2];
+        System.err.println("Iteraciones en learn");
+        System.err.println("numberOfObservations: "+ numberOfObservations);
+        System.err.println("numberOfSymbols: "+ numberOfSymbols);
 
         for (int iter = 0; iter < iterations; iter++){
+            System.err.println("iter: " + iter);
             System.out.println(iter);
             Double[][][] xi = currentModel.createXi(alpha, beta);
             Double[][] gamma = currentModel.createGamma(alpha, beta);
@@ -225,12 +234,13 @@ public class Learner {
             //Calculate probability of seen observation sequence given Lambda
             Double newProb = newModel.evaluate();
 
-            System.out.println("oldProb :" + currentProb);
-            System.out.println("newProb :" + newProb);
+            //System.out.println("oldProb :" + currentProb);
+            //System.out.println("newProb :" + newProb);
 
-            if (Math.abs(currentProb - newProb) < DELTA){
-                answer[0] = Helpers.matrixToString(estimatedTransition);
-                answer[1] = Helpers.matrixToString(estimatedEmission);
+            if (Math.abs(currentProb - newProb) < DELTA || iter == iterations - 1){
+                this.transitionMatrix = estimatedTransition;
+                this.emissionMatrix = estimatedEmission;
+                this.initialState = estimatedInitial;
                 break;
             }
             else {
@@ -246,9 +256,7 @@ public class Learner {
                 currentModel = newModel;
             }
         }
-
-        return Helpers.printMatrixes(answer);
-    }
+    }*/
 
     /**
      * Compute Pi, the initial probability vector
@@ -321,6 +329,11 @@ public class Learner {
         }
 
         return emission;
+    }
+
+    public Double evaluation(){
+        Evaluator eval = new Evaluator(this.transitionMatrix, this.emissionMatrix, this.initialState, this.observationsVector);
+        return eval.evaluate();
     }
 
 

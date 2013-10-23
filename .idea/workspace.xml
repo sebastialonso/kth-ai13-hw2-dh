@@ -5,11 +5,13 @@
     <ignored path="duckhunt.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/Main.java" changelist="d526d32d-bd91-4e5d-8ba2-02aab97dd967" time="1382382188010" ignored="false" />
-    <file path="/Player.java" changelist="d526d32d-bd91-4e5d-8ba2-02aab97dd967" time="1382472630211" ignored="false" />
+    <file path="/Player.java" changelist="d526d32d-bd91-4e5d-8ba2-02aab97dd967" time="1382486128886" ignored="false" />
     <file path="/a.dummy" changelist="d526d32d-bd91-4e5d-8ba2-02aab97dd967" time="1382380452074" ignored="false" />
-    <file path="/Learner.java" changelist="d526d32d-bd91-4e5d-8ba2-02aab97dd967" time="1382472546072" ignored="false" />
+    <file path="/Learner.java" changelist="d526d32d-bd91-4e5d-8ba2-02aab97dd967" time="1382486414217" ignored="false" />
     <file path="/HmmMethods.java" changelist="d526d32d-bd91-4e5d-8ba2-02aab97dd967" time="1382388923923" ignored="false" />
     <file path="/Evaluator.java" changelist="d526d32d-bd91-4e5d-8ba2-02aab97dd967" time="1382468755662" ignored="false" />
+    <file path="$PROJECT_DIR$/playerOutput" changelist="d526d32d-bd91-4e5d-8ba2-02aab97dd967" time="1382486436300" ignored="false" />
+    <file path="/fragment.java" changelist="d526d32d-bd91-4e5d-8ba2-02aab97dd967" time="1382482633300" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,6 +62,7 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
+    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
@@ -69,101 +72,115 @@
     <favorites_list name="duckhunt" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="Main.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/sebastialonso/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="17" selection-start="60" selection-end="60" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Action.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/sebastialonso/Action.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="51" column="27" selection-start="1122" selection-end="1122" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Client.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/sebastialonso/Client.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="145" column="20" selection-start="4648" selection-end="4648" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Player.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/sebastialonso/Player.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="103" column="55" selection-start="3900" selection-end="3900" vertical-scroll-proportion="0.49751243">
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#2969#2978#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Evaluator.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/sebastialonso/Evaluator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="161" column="75" selection-start="5587" selection-end="5587" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Extended.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/sebastialonso/Extended.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="8" selection-start="8" selection-end="8" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Learner.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/sebastialonso/Learner.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="39" column="15" selection-start="1333" selection-end="1333" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Bird.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/sebastialonso/Bird.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="102" selection-start="348" selection-end="348" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Constants.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/sebastialonso/Constants.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="13" selection-start="36" selection-end="36" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Helpers.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/sebastialonso/Helpers.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="72" column="5" selection-start="2648" selection-end="2648" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="horizontal" split-proportion="0.5">
+      <split-first>
+        <leaf>
+          <file leaf-file-name="Main.java" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/sebastialonso/Main.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="4" column="17" selection-start="60" selection-end="60" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Action.java" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/sebastialonso/Action.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="51" column="27" selection-start="1122" selection-end="1122" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Client.java" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/sebastialonso/Client.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="145" column="20" selection-start="4648" selection-end="4648" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Player.java" pinned="false" current="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/sebastialonso/Player.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="108" column="48" selection-start="4284" selection-end="4284" vertical-scroll-proportion="0.35852373">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Extended.java" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/sebastialonso/Extended.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="0" column="8" selection-start="8" selection-end="8" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Learner.java" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/sebastialonso/Learner.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="152" column="17" selection-start="6243" selection-end="6243" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Bird.java" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/sebastialonso/Bird.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="15" column="102" selection-start="348" selection-end="348" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Constants.java" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/sebastialonso/Constants.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="27" column="47" selection-start="1115" selection-end="1116" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Helpers.java" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/sebastialonso/Helpers.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="72" column="5" selection-start="2648" selection-end="2648" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file leaf-file-name="Learner.java" pinned="false" current="true" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/sebastialonso/Learner.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="139" column="30" selection-start="5722" selection-end="5722" vertical-scroll-proportion="-0.28474575">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Evaluator.java" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/sebastialonso/Evaluator.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="156" column="21" selection-start="5489" selection-end="5489" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -208,7 +225,7 @@
     <option name="STATE" value="0" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
+    <navigator proportions="" version="1" splitterProportion="0.5">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -219,57 +236,18 @@
       <autoscrollFromSource />
       <sortByType />
     </navigator>
-    <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="duckhunt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="duckhunt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="duckhunt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="duckhunt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="duckhunt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sebastialonso" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
     <property name="GoToFile.includeJavaFiles" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="recentsLimit" value="5" />
     <property name="MemberChooser.sorted" value="false" />
+    <property name="restartRequiresConfirmation" value="true" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="MemberChooser.copyJavadoc" value="false" />
+    <property name="dynamic.classpath" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -282,7 +260,7 @@
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="sebastialonso.Main" />
       <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="PROGRAM_PARAMETERS" value="verbose &gt; player2server &lt; server2player" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" value="" />
@@ -291,7 +269,13 @@
       <option name="PASS_PARENT_ENVS" value="true" />
       <module name="duckhunt" />
       <envs />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
       <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
@@ -313,6 +297,11 @@
     <list size="1">
       <item index="0" class="java.lang.String" itemvalue="Application.Main" />
     </list>
+    <recent_temporary>
+      <list size="1">
+        <item index="0" class="java.lang.String" itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
   <component name="TaskManager">
@@ -331,7 +320,7 @@
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3990461" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -437,9 +426,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sebastialonso/Deadline.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="22" selection-start="22" selection-end="22" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="0" column="22" selection-start="22" selection-end="22" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sebastialonso/GameState.java">
@@ -456,37 +443,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sebastialonso/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="17" selection-start="60" selection-end="60" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/sebastialonso/Client.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="145" column="20" selection-start="4648" selection-end="4648" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sebastialonso/Helpers.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="72" column="5" selection-start="2648" selection-end="2648" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sebastialonso/Constants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="13" selection-start="36" selection-end="36" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sebastialonso/Evaluator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="161" column="75" selection-start="5587" selection-end="5587" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -512,20 +471,45 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sebastialonso/Learner.java">
+    <entry file="file://$PROJECT_DIR$/src/sebastialonso/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="15" selection-start="1333" selection-end="1333" vertical-scroll-proportion="0.0">
+        <state line="4" column="17" selection-start="60" selection-end="60" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sebastialonso/Constants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="47" selection-start="1115" selection-end="1116" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sebastialonso/Helpers.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="72" column="5" selection-start="2648" selection-end="2648" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sebastialonso/Player.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="103" column="55" selection-start="3900" selection-end="3900" vertical-scroll-proportion="0.49751243">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2969#2978#0" expanded="true" />
-          </folding>
+        <state line="108" column="48" selection-start="4284" selection-end="4284" vertical-scroll-proportion="0.35852373">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sebastialonso/Evaluator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="156" column="21" selection-start="5489" selection-end="5489" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sebastialonso/Learner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="139" column="30" selection-start="5722" selection-end="5722" vertical-scroll-proportion="-0.28474575">
+          <folding />
         </state>
       </provider>
     </entry>
