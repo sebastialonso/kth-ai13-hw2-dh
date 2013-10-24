@@ -4,7 +4,7 @@ import java.util.Random;
 import java.util.Vector;
 
 class Player {
-    private int numberOfIterations = 0;
+    private int currentRound = -1;
     private Vector<Vector<Integer>> observations;
     private Learner[] shooter;
     // /constructor
@@ -28,23 +28,21 @@ class Player {
 	 * @param pDue time before which we must have returned
 	 * @return the prediction of a bird we want to shoot at, or cDontShoot to pass
 	 */
-	public Action shoot(GameState pState, Deadline pDue) throws Exception {
-        //System.err.println("Iteration in shoot: " + this.numberOfIterations);
-        System.err.println("asdad");
+	public Action shoot(GameState pState, Deadline pDue){
+        //System.err.println("Iteration in shoot: " + this.currentRound);
+        //System.err.println("Round: " + pState.getRound());
 
         Integer victim = -1;
         Integer shootTo = -1;
 
-        //Reset iterations count if a new season starts
-        if (this.numberOfIterations == 99) {
-            this.numberOfIterations = 0;
-        }
-
         //First round: create the learner for each bird, and populate it with the model. Also start gathering observations
-        if (this.numberOfIterations == 0) {
-            System.err.println(pState.getNumBirds());
+        if (this.currentRound != pState.getRound()) {
+            this.currentRound = pState.getRound();
+            System.err.println("number of birds : " + pState.getNumBirds());
             shooter = new Learner[pState.getNumBirds()];
+            System.err.println("number of shooters: " + shooter.length);
             observations = new Vector<Vector<Integer>>(pState.getNumBirds());
+            System.err.println("number of observations vectors: " + observations.capacity());
             Double[][] transition = new Double[5][5];
             Double[][] emission = new Double[5][9];
             Double[] initial = new Double[5];
@@ -100,51 +98,52 @@ class Player {
                 }
             }
             //We have enough observations to start the training
-            if (this.numberOfIterations == 89){
+            if (pState.getBird(0).getSeqLength() >= 74){
 
                 //Add the observations to the Learners
                 for (int i = 0; i < shooter.length; i++){
                     if (pState.getBird(i).isAlive())
                         shooter[i].setObservationVector(observations.get(i));
-                    //System.err.println("Size observation[" + i + "]: " + observations.get(i).size());
                 }
                 //Train each learner with 50 iterations
                 for (int i = 0; i < shooter.length; i++){
                     if (pState.getBird(i).isAlive()){
-                        shooter[i].learnReload(70);
-                        //System.err.println("Shooter[" + i + "] trained!");
-                        //System.err.println("Evaluation for shooter[" + i +"]: " + shooter[i].evaluation());
+                        shooter[i].learnReload(90);
                     }
                 }
 
-                System.err.println("Evaluation for each shooter");
-                //Then each learner must find out how much probable is to get the sequence of observation seen. (Problem 1: Evaluation)
-
-                //Take the most probable bird over all bird models
+                //From all converged models, take the one with the best probability on detecting the
+                //observation sequence so far, and designate the victim
                 Double logProb = Double.NEGATIVE_INFINITY;
-                for (int i = 0; i < shooter.length; i++){
-                    if (pState.getBird(i).isAlive()){
 
-                        //System.err.println(shooter[i].evaluation());
+                for (int i = 0; i < shooter.length; i++){
+                    if (pState.getBird(i).isAlive() && shooter[i].isHasConverged()){
                         if (logProb < shooter[i].evaluation()){
                             logProb = shooter[i].evaluation();
                             victim = i;
                         }
                     }
                 }
-                shootTo = Helpers.whereToShoot(shooter[victim].getGammaTMinusTwo(), shooter[victim].getTransitionMatrix(), shooter[victim].getEmissionMatrix());
 
+                //If there is no victim succesfully predicted, nor confidence on next movement, don't shoot
+                if (victim == -1){
+                    return cDontShoot;
+                }
+                shootTo = Helpers.whereToShoot(shooter[victim].getGammaTMinusTwo(), shooter[victim].getTransitionMatrix(), shooter[victim].getEmissionMatrix());
+                if (shootTo == -1){
+                    return cDontShoot;
+                }
                 //Predict the most likely next observation, and shoot (Problem 0: Most likely next observation)
                 //Else, don't do anything, go next
 
 
             }
         }
-        this.numberOfIterations++;
 		/*
 		 * Here you should write your clever algorithms to get the best action.
 		 * This skeleton never shoots.
          */
+
 		// This line choose not to shoot
 		//return cDontShoot;
 

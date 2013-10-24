@@ -11,8 +11,9 @@ public class Learner {
     private int numberOfStates;
     private int numberOfObservations;
     private int numberOfSymbols;
-    private  double DELTA = 1e-5;
+    private  double DELTA = 1e-7;
     private Double evaluationLogProb = Double.NEGATIVE_INFINITY;
+    private boolean hasConverged = false;
     private Double[] gammaTMinusTwo;
 
 
@@ -183,13 +184,12 @@ public class Learner {
             initial = estimatedInitial;
 
             if (Math.abs(logProb - evaluationLogProb) < DELTA ){
-                System.err.println("Convergence achieved");
+                System.err.println("Convergence achieved...");
+                this.hasConverged = true;
                 break;
 
             }
             else {
-                //System.err.println("oldProb: " + evaluationLogProb);
-                //System.err.println("logProb: " + logProb);
                 this.evaluationLogProb = logProb;
             }
 
@@ -343,6 +343,10 @@ public class Learner {
 
     public Double[][] getEmissionMatrix() {
         return emissionMatrix;
+    }
+
+    public boolean isHasConverged() {
+        return hasConverged;
     }
 }
 

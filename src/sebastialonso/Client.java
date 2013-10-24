@@ -93,8 +93,8 @@ class Client {
 			// Ask the player what to do
 			Deadline lDue = new Deadline(lMs);
 			Action lAction = mPlayer.shoot(mState, lDue);
-			if (lDue.remainingMs() < 0)
-				throw new Exception("Player timed out during SHOOT");
+			//if (lDue.remainingMs() < 0)
+			//	throw new Exception("Player timed out during SHOOT");
 
 			// Mark any new moves as processed
 			mState.resetNumNewTurns();
@@ -147,7 +147,7 @@ class Client {
 			if (lDue.remainingMs() < 0)
 				throw new Exception("Player timed out during REVEAL");
 		} else if (lMessageType.equals("TIMEOUT")) {
-			throw new Exception("Received TIMEOUT from server");
+			//throw new Exception("Received TIMEOUT from server");
 		} else if (lMessageType.equals("GAMEOVER")) {
 			if (Main.gVerbose)
 				System.err.println("Received GAMEOVER from server");

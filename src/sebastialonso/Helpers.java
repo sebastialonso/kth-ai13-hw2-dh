@@ -89,9 +89,8 @@ public class Helpers {
         }
         return value;
     }
-    public static Double[] vectorTimesMatrix(Double[] vector, Double[][] matrix) throws Exception {
+    public static Double[] vectorTimesMatrix(Double[] vector, Double[][] matrix){
         //System.err.println(vector.length + " == " + matrix.length);
-        if (vector.length == matrix.length){
             Double[] result = new Double[matrix[0].length];
             for (int colIndex = 0; colIndex < vector.length; colIndex++){
                 Double auxValue = 0.0;
@@ -101,13 +100,17 @@ public class Helpers {
                 result[colIndex] = auxValue;
             }
             return result;
-        }
-        else {
-            throw new Exception("Not correct size of parameters");
-        }
     }
 
-    public static Integer whereToShoot(Double[] gammaTMinusTwo, Double[][] transition, Double[][] emission) throws Exception {
+    /**
+     * Here it chosen where to shoot. If the most likely observation probability is less than 0.75,
+     * we don't take the shot.
+     * @param gammaTMinusTwo
+     * @param transition
+     * @param emission
+     * @return
+     */
+    public static Integer whereToShoot(Double[] gammaTMinusTwo, Double[][] transition, Double[][] emission){
         Double[] gammaTMinusOne = vectorTimesMatrix(gammaTMinusTwo, transition);
         gammaTMinusOne = vectorTimesMatrix(gammaTMinusOne, transition);
 
@@ -121,16 +124,16 @@ public class Helpers {
             mostLikely[colIndex] = auxValue;
         }
 
-        Double maxValue = 0.0;
+        Double maxProbability = 0.0;
         Integer arg = -1;
 
         for (int i = 0; i < mostLikely.length; i++){
-            System.err.println(i);
-            if (mostLikely[i] > maxValue){
-                maxValue = mostLikely[i];
+            if (mostLikely[i] > maxProbability && mostLikely[i] >= 0.70){
+                maxProbability = mostLikely[i];
                 arg = i;
             }
         }
+        System.err.println("most likely sequence probability: " + maxProbability);
         return arg;
     }
 
